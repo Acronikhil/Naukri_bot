@@ -35,6 +35,9 @@ Use **Update now** any time to test.
   If the laptop couldn't wake (for example wake timers are off, or it was shut down), the missed
   update runs as soon as the laptop is on again.
 - After waking, the bot waits up to 3 minutes for Wi-Fi to reconnect and retries up to 3 times.
+- **Session expired?** The bot opens the Naukri login page in a browser window and shows a
+  pop-up asking you to log in. It waits up to 30 minutes; once you log in, the update continues
+  automatically. If you don't, it tries again at the next scheduled time.
 - Requirement: you must be **signed in to Windows**. A locked screen is fine; signed out or shut
   down is not.
 

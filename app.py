@@ -438,6 +438,9 @@ class App(ctk.CTk):
     # ================= system =================
     def _check_system_state(self):
         self.task_active = ts.is_registered()
+        if self.task_active and self._valid_end_silent() and self.settings.times:
+            # Re-register so an existing task picks up any changes to the task definition.
+            ts.register(self.settings.times, self.settings.end_date)
         self.wake_ok = ts.wake_timers_enabled()
 
     def enable_wake(self):

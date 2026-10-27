@@ -91,7 +91,7 @@ def _task_xml(times: list[str], end_date: str) -> str:
     <Hidden>false</Hidden>
     <RunOnlyIfIdle>false</RunOnlyIfIdle>
     <WakeToRun>true</WakeToRun>
-    <ExecutionTimeLimit>PT20M</ExecutionTimeLimit>
+    <ExecutionTimeLimit>PT1H</ExecutionTimeLimit>
     <Priority>7</Priority>
   </Settings>
   <Actions Context="Author">

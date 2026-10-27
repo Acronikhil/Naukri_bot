@@ -232,6 +232,7 @@ def manual_login(log: Log, timeout_minutes: int = 10) -> bool:
         ctx = _launch(p, hidden=False)
         page = ctx.pages[0] if ctx.pages else ctx.new_page()
         page.goto(LOGIN_URL, wait_until="domcontentloaded")
+        page.bring_to_front()
         log("Browser opened. Log in to Naukri (Google, OTP or password) in that window.")
         deadline = time.time() + timeout_minutes * 60
         logged_in = False
