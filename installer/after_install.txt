@@ -1,0 +1,24 @@
+Naukri Profile Bot is installed. Finish setup in 4 steps:
+
+1. LOG IN
+   Open the app. In "Naukri account", click "Log in with browser" and sign in to
+   Naukri (Google, OTP or password). Or choose "Email & Password" and click
+   "Save credentials".
+
+2. CHOOSE TIMES
+   In "Schedule", add the times you want your profile refreshed every day
+   (for example 10:00 AM, 12:30 PM, 2:00 PM) and pick a "Run until" date.
+
+3. ALLOW WAKE FROM SLEEP
+   In "Status", if "Wake from sleep" says Disabled, click "Enable" so updates
+   also run while your laptop is asleep.
+
+4. ACTIVATE
+   Click "Activate schedule". Use "Update now" any time to test it.
+
+That's it. You can close the app: updates keep running in the background,
+even when your laptop is locked or asleep, as long as you stay signed in
+to Windows. If your Naukri login expires, a browser window opens and asks
+you to log in again.
+
+Requirements: Windows 10 or 11 with Microsoft Edge (pre-installed on Windows).
