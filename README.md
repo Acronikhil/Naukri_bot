@@ -86,8 +86,11 @@ python main.py
 `winget install JRSoftware.InnoSetup`):
 
 ```powershell
-.\build.ps1        # -> dist\NaukriProfileBot-Setup-<version>.exe
+.\build.bat        # -> dist\NaukriProfileBot-Setup-<version>.exe
 ```
+
+`build.bat` runs `build.ps1` with a one-time execution-policy bypass, so it works even where
+PowerShell scripts are disabled (the Windows default).
 
 **Publish a release:** bump `APP_VERSION` in `config.py`, commit, then push a matching tag.
 GitHub Actions builds the installer and attaches it to a new release.

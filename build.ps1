@@ -1,5 +1,6 @@
 # Builds dist\NaukriProfileBot-Setup-<version>.exe
 # Requires: Python 3.11+, Inno Setup 6 (https://jrsoftware.org/isinfo.php)
+# Run via build.bat if PowerShell scripts are disabled on this PC.
 $ErrorActionPreference = "Stop"
 Set-Location $PSScriptRoot
 
