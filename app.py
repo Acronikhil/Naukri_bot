@@ -8,7 +8,7 @@ import customtkinter as ctk
 import bot
 import task_scheduler as ts
 from config import (
-    LOG_FILE, Settings, append_log, delete_password, get_password, load_status,
+    LOG_FILE, Settings, resource_path, append_log, delete_password, get_password, load_status,
     set_password, update_status,
 )
 from run_task import perform
@@ -18,6 +18,7 @@ try:
 except ImportError:  # optional dependency
     Calendar = None
 
+ICON = resource_path("assets/icon.ico")
 ACCENT = "#275DF5"
 ACCENT_HOVER = "#1C47C9"
 DANGER = "#E5484D"
@@ -66,6 +67,8 @@ class App(ctk.CTk):
         else:
             self.geometry("1060x700")
         self.configure(fg_color=BG)
+        if ICON.exists():  # CustomTkinter sets its own icon shortly after start; override it after
+            self.after(250, lambda: self.iconbitmap(str(ICON)))
 
         self.settings = Settings.load()
         self.task_active = False
@@ -542,6 +545,10 @@ class App(ctk.CTk):
         threading.Thread(target=wrapper, daemon=True).start()
 
 
-if __name__ == "__main__":
+def launch():
     ctk.set_appearance_mode("light")
     App().mainloop()
+
+
+if __name__ == "__main__":
+    launch()

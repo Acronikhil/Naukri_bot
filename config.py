@@ -1,6 +1,7 @@
 """Settings persistence, shared log/status files and secure credential storage."""
 import json
 import os
+import sys
 from dataclasses import asdict, dataclass, field
 from datetime import datetime
 from pathlib import Path
@@ -8,6 +9,7 @@ from pathlib import Path
 import keyring
 
 APP_NAME = "NaukriProfileBot"
+APP_VERSION = "1.0.0"
 APP_DIR = Path(os.environ.get("APPDATA", Path.home())) / APP_NAME
 BROWSER_PROFILE_DIR = APP_DIR / "browser_profile"
 CONFIG_FILE = APP_DIR / "config.json"
@@ -17,6 +19,12 @@ LOG_FILE = APP_DIR / "bot.log"
 ERROR_SCREENSHOT = APP_DIR / "last_error.png"
 
 APP_DIR.mkdir(parents=True, exist_ok=True)
+
+
+def resource_path(relative: str) -> Path:
+    """Path to a bundled file, both from source and inside the PyInstaller build."""
+    base = Path(getattr(sys, "_MEIPASS", Path(__file__).resolve().parent))
+    return base / relative
 
 
 @dataclass

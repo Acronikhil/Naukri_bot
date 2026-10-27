@@ -17,6 +17,16 @@ RUN_SCRIPT = Path(__file__).resolve().with_name("run_task.py")
 NO_WINDOW = subprocess.CREATE_NO_WINDOW
 
 
+def _task_command() -> tuple[Path, str, Path]:
+    """(program, arguments, working dir) that the scheduled task runs."""
+    if getattr(sys, "frozen", False):  # installed .exe build
+        exe = Path(sys.executable)
+        return exe, "--run-task", exe.parent
+    pythonw = Path(sys.executable).with_name("pythonw.exe")
+    exe = pythonw if pythonw.exists() else Path(sys.executable)
+    return exe, f'"{RUN_SCRIPT}"', RUN_SCRIPT.parent
+
+
 def _run(*args: str) -> subprocess.CompletedProcess:
     return subprocess.run(args, capture_output=True, text=True, creationflags=NO_WINDOW)
 
@@ -59,8 +69,7 @@ def _task_xml(times: list[str], end_date: str) -> str:
       <ScheduleByDay><DaysInterval>1</DaysInterval></ScheduleByDay>
     </CalendarTrigger>""")
 
-    pythonw = Path(sys.executable).with_name("pythonw.exe")
-    exe = pythonw if pythonw.exists() else Path(sys.executable)
+    exe, arguments, workdir = _task_command()
     user = f"{os.environ.get('USERDOMAIN', '')}\\{os.environ.get('USERNAME', '')}"
     return f"""<?xml version="1.0" encoding="UTF-16"?>
 <Task version="1.2" xmlns="http://schemas.microsoft.com/windows/2004/02/mit/task">
@@ -97,8 +106,8 @@ def _task_xml(times: list[str], end_date: str) -> str:
   <Actions Context="Author">
     <Exec>
       <Command>{escape(str(exe))}</Command>
-      <Arguments>"{escape(str(RUN_SCRIPT))}"</Arguments>
-      <WorkingDirectory>{escape(str(RUN_SCRIPT.parent))}</WorkingDirectory>
+      <Arguments>{escape(arguments)}</Arguments>
+      <WorkingDirectory>{escape(str(workdir))}</WorkingDirectory>
     </Exec>
   </Actions>
 </Task>
